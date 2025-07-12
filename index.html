@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Embark on an extraordinary journey through space with our immersive space tourism experience.">
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <!-- Preload critical assets -->
+  <link rel="preload" href="./assets/shared/logo.svg" as="image">
+  <link rel="preload" href="index.css" as="style">
+  
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,22 +18,26 @@
       
   <!-- Our custom CSS -->
   <link rel="stylesheet" href="index.css">
-  <title>Frontend Mentor | Space tourism website</title>
+  <title>Space Tourism - Your Gateway to the Stars</title>
   <script src="navigation.js" defer></script>
+  <script src="transitions.js" defer></script>
+  <script src="utils.js" defer></script>
 </head>
 <body class="home">
   <a class="skip-to-content" href="#main">Skip to content</a>
-  <header class="primary-header flex">
+  <header class="primary-header flex" role="banner">
     <div>
       <img src="./assets/shared/logo.svg" alt="space tourism logo" class="logo">
     </div>
-    <button class="mobile-nav-toggle" aria-controls="primary-navigation"><span class="sr-only" aria-expanded="false">Menu</span></button>
-    <nav>
+    <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav role="navigation">
         <ul id="primary-navigation" data-visible="false" class="primary-navigation underline-indicators flex">
-            <li class="active"><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="index.html"><span aria-hidden="true">00</span>Home</a>
-            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="destination.html"><span aria-hidden="true">01</span>Destination</a>
-            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="crew.html"><span aria-hidden="true">02</span>Crew</a>
-            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2" href="technology.html"><span aria-hidden="true">03</span>Technology</a>
+            <li class="active"><a class="ff-sans-cond uppercase text-white letter-spacing-2 interactive-hover" href="index.html"><span aria-hidden="true">00</span>Home</a>
+            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2 interactive-hover" href="destination.html" data-tooltip="Explore Space Destinations"><span aria-hidden="true">01</span>Destination</a>
+            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2 interactive-hover" href="crew.html" data-tooltip="Meet Your Space Crew"><span aria-hidden="true">02</span>Crew</a>
+            <li><a class="ff-sans-cond uppercase text-white letter-spacing-2 interactive-hover" href="technology.html" data-tooltip="Discover Space Technology"><span aria-hidden="true">03</span>Technology</a>
         </ul>
     </nav>
   </header>
@@ -38,15 +47,21 @@
       <h1 class="text-accent fs-500 ff-sans-cond uppercase letter-spacing-1">So, you want to travel to
       <span class="d-block fs-900 ff-serif text-white">Space</span></h1>
       
-      <p>Let’s face it; if you want to go to space, you might as well genuinely go to 
+      <p>Let's face it; if you want to go to space, you might as well genuinely go to 
       outer space and not hover kind of on the edge of it. Well sit back, and relax 
-      because we’ll give you a truly out of this world experience! </p>
+      because we'll give you a truly out of this world experience!</p>
     </div>
     <div>
-      <a href="destination.html" class="large-button uppercase ff-serif text-dark bg-white">Explore</a>
+      <a href="destination.html" class="large-button uppercase ff-serif text-dark bg-white" data-tooltip="Begin Your Space Journey">Explore</a>
     </div>
   </main>
 
+  <!-- Background stars with parallax effect -->
+  <div class="stars-container parallax" data-speed="0.3" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
 
 </body>
 </html>
