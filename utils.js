@@ -44,7 +44,7 @@ const initParallax = () => {
 
 // Enhance images with lazy loading
 const enhanceImages = () => {
-    const images = document.querySelectorAll('img:not([loading])');
+    const images = document.querySelectorAll('img:not([loading]):not(.logo)');
     images.forEach(img => {
         img.setAttribute('loading', 'lazy');
         

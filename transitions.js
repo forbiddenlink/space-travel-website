@@ -10,14 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
     links.forEach(link => {
         link.addEventListener('click', (e) => {
             const isInternalLink = link.href.startsWith(window.location.origin) || link.href.startsWith('/');
+            const isSamePage = link.href === window.location.href || link.href === window.location.pathname;
             
-            if (isInternalLink) {
+            if (isInternalLink && !isSamePage) {
                 e.preventDefault();
                 transitionElement.classList.add('active');
                 
                 setTimeout(() => {
                     window.location.href = link.href;
                 }, 300); // Half of the transition duration
+            } else if (isSamePage) {
+                e.preventDefault(); // Prevent page reload when clicking current page link
             }
         });
     });
