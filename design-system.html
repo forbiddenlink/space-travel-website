@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Design system</title>
         
         <!-- Google fonts -->
@@ -9,10 +12,6 @@
             rel="stylesheet">
             
          <link rel="stylesheet" href="index.css">
-
-        <style>
-            
-        </style>
     </head>
     <body>
         
@@ -110,17 +109,17 @@
                     
                     <div class="flow" style="margin-bottom: 50vh; --flow-space: 4rem">
                         <!-- Tabs -->
-                        <div class="tab-list underline-indicators flex">
-                            <button aria-selected="true" class="uppercase ff-sans-cond text-accent letter-spacing-2">Moon</button>
-                            <button aria-selected="false" class="uppercase ff-sans-cond text-accent letter-spacing-2">Mars</button>
-                            <button aria-selected="false" class="uppercase ff-sans-cond text-accent letter-spacing-2">Europa</button>
+                        <div class="tab-list underline-indicators flex" role="tablist">
+                            <button role="tab" aria-selected="true" class="uppercase ff-sans-cond text-accent letter-spacing-2">Moon</button>
+                            <button role="tab" aria-selected="false" class="uppercase ff-sans-cond text-accent letter-spacing-2">Mars</button>
+                            <button role="tab" aria-selected="false" class="uppercase ff-sans-cond text-accent letter-spacing-2">Europa</button>
                         </div>
                         
                         <!-- Dots -->
-                        <div class="dot-indicators flex">
-                            <button aria-selected="true"><span class="sr-only">Slide title</span></button>
-                            <button aria-selected="false"><span class="sr-only">Slide title</span></button>
-                            <button aria-selected="false"><span class="sr-only">Slide title</span></button>
+                        <div class="dot-indicators flex" role="tablist">
+                            <button role="tab" aria-selected="true"><span class="sr-only">Slide title</span></button>
+                            <button role="tab" aria-selected="false"><span class="sr-only">Slide title</span></button>
+                            <button role="tab" aria-selected="false"><span class="sr-only">Slide title</span></button>
                         </div>
                         
                         <!-- Numbers -->
