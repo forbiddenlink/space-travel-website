@@ -46,7 +46,7 @@ A modern, fully responsive space tourism website showcasing destinations, crew m
 
 ## 📋 Prerequisites
 
-- Node.js (v14.0.0 or higher)
+- Node.js (v18.0.0 or higher)
 - npm
 
 ## 🚀 Getting Started
