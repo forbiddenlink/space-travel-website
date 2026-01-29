@@ -1,39 +1,67 @@
-// Create transition element
-const transitionElement = document.createElement('div');
-transitionElement.className = 'page-transition';
-document.body.appendChild(transitionElement);
+// Initialize transition element and loading indicator
+let transitionElement = null;
+let loadingIndicator = null;
+
+const initializeTransitionElements = () => {
+    if (!transitionElement) {
+        transitionElement = document.createElement('div');
+        transitionElement.className = 'page-transition';
+        document.body.appendChild(transitionElement);
+    }
+    
+    if (!loadingIndicator) {
+        loadingIndicator = document.createElement('div');
+        loadingIndicator.className = 'loading-indicator';
+        loadingIndicator.innerHTML = `
+            <div class="loading-spinner"></div>
+            <p>Preparing for launch...</p>
+        `;
+        document.body.appendChild(loadingIndicator);
+    }
+};
 
 // Handle page transitions
-document.addEventListener('DOMContentLoaded', () => {
+const attachLinkListeners = () => {
     const links = document.querySelectorAll('a[href]:not([target="_blank"])');
     
     links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const isInternalLink = link.href.startsWith(window.location.origin) || link.href.startsWith('/');
-            const isSamePage = link.href === window.location.href || link.href === window.location.pathname;
+        // Remove previous listener if it exists by cloning
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+        
+        newLink.addEventListener('click', (e) => {
+            const isInternalLink = newLink.href.startsWith(window.location.origin) || newLink.href.startsWith('/');
+            const isSamePage = newLink.href === window.location.href || newLink.href === window.location.pathname;
             
             if (isInternalLink && !isSamePage) {
                 e.preventDefault();
-                transitionElement.classList.add('active');
+                
+                if (transitionElement) {
+                    transitionElement.classList.add('active');
+                }
                 
                 setTimeout(() => {
-                    window.location.href = link.href;
+                    window.location.href = newLink.href;
                 }, 300); // Half of the transition duration
             } else if (isSamePage) {
                 e.preventDefault(); // Prevent page reload when clicking current page link
             }
         });
     });
-});
+};
 
-// Add loading indicator
-const loadingIndicator = document.createElement('div');
-loadingIndicator.className = 'loading-indicator';
-loadingIndicator.innerHTML = `
-    <div class="loading-spinner"></div>
-    <p>Preparing for launch...</p>
-`;
-document.body.appendChild(loadingIndicator);
+// Initialize when DOM is ready
+const initializeOnDOMReady = () => {
+    initializeTransitionElements();
+    attachLinkListeners();
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeOnDOMReady);
+} else {
+    // DOM is already loaded
+    initializeOnDOMReady();
+}
 
 // Show loading indicator when navigation starts
 window.addEventListener('beforeunload', () => {
