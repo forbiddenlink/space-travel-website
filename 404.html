@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Page not found - Lost in space. Navigate back to Stellar Voyages Space Tourism."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#0B0D17" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/favicon-32x32.png"
+    />
+    <link rel="apple-touch-icon" href="./assets/favicon-32x32.png" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Our custom CSS -->
+    <link rel="stylesheet" href="index.css" />
+    <title>404 - Lost in Space | Space Tourism</title>
+
+    <style>
+      .error-404-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image:
+          radial-gradient(
+            ellipse at 50% 50%,
+            hsl(220 80% 20% / 0.4) 0px,
+            transparent 50%
+          ),
+          url(./assets/home/background-home-desktop.jpg);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+
+      .error-404-content {
+        text-align: center;
+        padding: 2rem;
+        max-width: 600px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .error-icon {
+        font-size: 8rem;
+        margin-bottom: 2rem;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .error-code {
+        font-family: var(--ff-serif);
+        font-size: clamp(4rem, 15vw, 10rem);
+        color: hsl(var(--clr-white));
+        line-height: 1;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 30px hsl(var(--clr-accent) / 0.5);
+      }
+
+      .error-title {
+        font-family: var(--ff-serif);
+        font-size: clamp(1.5rem, 5vw, 3rem);
+        color: hsl(var(--clr-light));
+        margin-bottom: 1.5rem;
+      }
+
+      .error-message {
+        font-size: 1.125rem;
+        color: hsl(var(--clr-white) / 0.8);
+        margin-bottom: 3rem;
+        line-height: 1.8;
+      }
+
+      .error-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .error-btn {
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        font-family: var(--ff-sans-cond);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 0.875rem;
+      }
+
+      .error-btn-primary {
+        background: hsl(var(--clr-white));
+        color: hsl(var(--clr-dark));
+        border: 2px solid hsl(var(--clr-white));
+      }
+
+      .error-btn-primary:hover {
+        background: hsl(var(--clr-accent));
+        border-color: hsl(var(--clr-accent));
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px hsl(var(--clr-accent) / 0.4);
+      }
+
+      .error-btn-secondary {
+        background: transparent;
+        color: hsl(var(--clr-white));
+        border: 2px solid hsl(var(--clr-white) / 0.3);
+      }
+
+      .error-btn-secondary:hover {
+        background: hsl(var(--clr-white) / 0.1);
+        border-color: hsl(var(--clr-white));
+      }
+
+      .error-suggestions {
+        margin-top: 4rem;
+        padding-top: 3rem;
+        border-top: 1px solid hsl(var(--clr-white) / 0.1);
+      }
+
+      .error-suggestions h3 {
+        font-family: var(--ff-sans-cond);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.875rem;
+        color: hsl(var(--clr-light));
+        margin-bottom: 1.5rem;
+      }
+
+      .error-links {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .error-links a {
+        color: hsl(var(--clr-white) / 0.7);
+        text-decoration: none;
+        font-family: var(--ff-sans-normal);
+        transition: color 0.3s;
+      }
+
+      .error-links a:hover {
+        color: hsl(var(--clr-accent));
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(10deg);
+        }
+      }
+
+      /* Floating asteroids */
+      .asteroid {
+        position: absolute;
+        font-size: 2rem;
+        animation: drift 20s linear infinite;
+        opacity: 0.3;
+      }
+
+      .asteroid-1 {
+        top: 10%;
+        left: 10%;
+        animation-duration: 25s;
+      }
+
+      .asteroid-2 {
+        top: 70%;
+        right: 15%;
+        animation-duration: 30s;
+        animation-delay: 5s;
+      }
+
+      .asteroid-3 {
+        bottom: 20%;
+        left: 20%;
+        animation-duration: 35s;
+        animation-delay: 10s;
+      }
+
+      @keyframes drift {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        100% {
+          transform: translate(100vw, 100vh) rotate(360deg);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .error-actions {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .error-btn {
+          width: 100%;
+        }
+
+        .error-links {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="error-404-page">
+    <!-- Floating asteroids -->
+    <div class="asteroid asteroid-1">☄️</div>
+    <div class="asteroid asteroid-2">🌑</div>
+    <div class="asteroid asteroid-3">💫</div>
+
+    <div class="error-404-content">
+      <div class="error-icon">🛸</div>
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Houston, We Have a Problem</h2>
+      <p class="error-message">
+        You've drifted into uncharted space. This page doesn't exist in our star
+        system. Let's navigate you back to safer coordinates.
+      </p>
+
+      <div class="error-actions">
+        <a href="index.html" class="error-btn error-btn-primary">
+          Return to Home Base
+        </a>
+        <a
+          href="javascript:history.back()"
+          class="error-btn error-btn-secondary"
+        >
+          Go Back
+        </a>
+      </div>
+
+      <div class="error-suggestions">
+        <h3>Popular Destinations</h3>
+        <div class="error-links">
+          <a href="destination.html">Explore Destinations</a>
+          <a href="crew.html">Meet Our Crew</a>
+          <a href="technology.html">View Technology</a>
+          <a href="design-system.html">Design System</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Starfield background -->
+    <div class="stars-container parallax" data-speed="0.3" aria-hidden="true">
+      <div class="stars"></div>
+      <div class="stars2"></div>
+      <div class="stars3"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,517 @@
+/* ===================================
+   COUNTDOWN TIMER
+   =================================== */
+
+.countdown-container {
+    margin: 4rem auto;
+    max-width: 60rem;
+    padding: 3rem 2rem;
+    background: hsl(var(--clr-white) / 0.03);
+    border: 1px solid hsl(var(--clr-white) / 0.1);
+    border-radius: 1.5rem;
+    text-align: center;
+}
+
+.countdown-header {
+    margin-bottom: 2rem;
+}
+
+.countdown-header h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+    font-family: var(--ff-serif);
+    font-size: 1.5rem;
+    color: hsl(var(--clr-white));
+}
+
+.countdown-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.flip-card {
+    perspective: 1000px;
+    width: 80px;
+    height: 90px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s;
+    transform-style: preserve-3d;
+}
+
+.flip-card.flipping .flip-card-inner {
+    animation: flip 0.6s ease-in-out;
+}
+
+.flip-card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    background: hsl(var(--clr-white) / 0.1);
+    border: 2px solid hsl(var(--clr-white) / 0.2);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px hsl(var(--clr-dark) / 0.5);
+}
+
+.countdown-value {
+    font-family: var(--ff-serif);
+    font-size: 2.5rem;
+    color: hsl(var(--clr-white));
+    font-weight: bold;
+}
+
+.countdown-separator {
+    font-family: var(--ff-serif);
+    font-size: 2rem;
+    color: hsl(var(--clr-white) / 0.5);
+    margin: 0 0.25rem;
+}
+
+.countdown-unit-label {
+    font-family: var(--ff-sans-cond);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: hsl(var(--clr-light));
+}
+
+.countdown-footer {
+    margin-top: 2rem;
+}
+
+.countdown-notify-btn {
+    background: hsl(var(--clr-white) / 0.1);
+    border: 2px solid hsl(var(--clr-white) / 0.3);
+    color: hsl(var(--clr-white));
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    font-family: var(--ff-sans-cond);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.countdown-notify-btn:hover {
+    background: hsl(var(--clr-white));
+    color: hsl(var(--clr-dark));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px hsl(var(--clr-white) / 0.3);
+}
+
+.launch-complete {
+    padding: 2rem;
+}
+
+.rocket-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: rocketLaunch 2s ease-out infinite;
+}
+
+@keyframes flip {
+    0% { transform: rotateX(0deg); }
+    50% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0deg); }
+}
+
+/* ===================================
+   FAQ ACCORDION
+   =================================== */
+
+.faq-section {
+    padding: 6rem 2rem;
+    background: hsl(var(--clr-dark));
+}
+
+.faq-container {
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    margin-top: 3rem;
+}
+
+.faq-intro h3 {
+    color: hsl(var(--clr-light));
+    margin-bottom: 1rem;
+}
+
+.faq-intro p {
+    margin-bottom: 2rem;
+    max-width: 30ch;
+}
+
+.faq-contact-link {
+    color: hsl(var(--clr-accent));
+    text-decoration: none;
+    font-family: var(--ff-sans-cond);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.faq-contact-link:hover {
+    color: hsl(var(--clr-white));
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.faq-item {
+    background: hsl(var(--clr-white) / 0.03);
+    border: 1px solid hsl(var(--clr-white) / 0.1);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.faq-item:hover {
+    border-color: hsl(var(--clr-white) / 0.2);
+    background: hsl(var(--clr-white) / 0.05);
+}
+
+.faq-question {
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    color: hsl(var(--clr-white));
+    transition: color 0.3s;
+}
+
+.faq-question:hover {
+    color: hsl(var(--clr-light));
+}
+
+.faq-question-text {
+    font-size: 1rem;
+    flex: 1;
+}
+
+.faq-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s;
+}
+
+.faq-question.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.faq-answer p {
+    padding: 0 1.5rem 1.5rem;
+    color: hsl(var(--clr-white) / 0.8);
+    line-height: 1.8;
+}
+
+/* ===================================
+   TESTIMONIALS CAROUSEL
+   =================================== */
+
+.testimonials-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(
+        180deg,
+        hsl(var(--clr-dark)) 0%,
+        hsl(230 35% 10%) 100%
+    );
+}
+
+.testimonials-container {
+    max-width: 80rem;
+    margin: 0 auto;
+}
+
+.testimonials-carousel {
+    position: relative;
+    margin: 3rem 0;
+    padding: 0 4rem;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: hsl(var(--clr-white) / 0.1);
+    border: 2px solid hsl(var(--clr-white) / 0.2);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 2;
+    color: hsl(var(--clr-white));
+}
+
+.carousel-control:hover {
+    background: hsl(var(--clr-white) / 0.2);
+    border-color: hsl(var(--clr-white));
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control.prev {
+    left: 0;
+}
+
+.carousel-control.next {
+    right: 0;
+}
+
+.testimonials-track {
+    position: relative;
+    min-height: 400px;
+}
+
+.testimonial-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.5s, transform 0.5s;
+    pointer-events: none;
+}
+
+.testimonial-card.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+    position: relative;
+}
+
+.testimonial-content {
+    background: hsl(var(--clr-white) / 0.05);
+    border: 1px solid hsl(var(--clr-white) / 0.1);
+    border-radius: 1.5rem;
+    padding: 3rem;
+    backdrop-filter: blur(10px);
+}
+
+.stars {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    margin: 0 0 2rem;
+    font-style: italic;
+    color: hsl(var(--clr-white) / 0.9);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid hsl(var(--clr-white) / 0.1);
+}
+
+.author-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: hsl(var(--clr-white) / 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.author-name {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.author-role {
+    color: hsl(var(--clr-white) / 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.author-destination {
+    font-size: 0.875rem;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.carousel-indicators .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: hsl(var(--clr-white) / 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+}
+
+.carousel-indicators .indicator:hover {
+    background: hsl(var(--clr-white) / 0.5);
+    transform: scale(1.2);
+}
+
+.carousel-indicators .indicator.active {
+    background: hsl(var(--clr-white));
+    width: 32px;
+    border-radius: 6px;
+}
+
+/* Testimonials Stats */
+.testimonials-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+    background: hsl(var(--clr-white) / 0.03);
+    border: 1px solid hsl(var(--clr-white) / 0.1);
+    border-radius: 1rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    color: hsl(var(--clr-accent));
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: hsl(var(--clr-light));
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .countdown-display {
+        gap: 0.5rem;
+    }
+    
+    .flip-card {
+        width: 60px;
+        height: 70px;
+    }
+    
+    .countdown-value {
+        font-size: 1.75rem;
+    }
+    
+    .countdown-separator {
+        font-size: 1.5rem;
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .faq-intro {
+        text-align: center;
+    }
+    
+    .faq-intro p {
+        margin-inline: auto;
+    }
+    
+    .testimonials-carousel {
+        padding: 0 3rem;
+    }
+    
+    .carousel-control {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .testimonial-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .testimonial-text {
+        font-size: 1rem;
+    }
+    
+    .testimonials-stats {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-container {
+        padding: 2rem 1rem;
+    }
+    
+    .flip-card {
+        width: 50px;
+        height: 60px;
+    }
+    
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+    
+    .countdown-unit-label {
+        font-size: 0.75rem;
+    }
+    
+    .testimonials-carousel {
+        padding: 0 2.5rem;
+    }
+    
+    .carousel-control {
+        width: 2rem;
+        height: 2rem;
+    }
+}
