@@ -9,7 +9,11 @@
       "mcp__plugin_playwright_playwright__browser_console_messages",
       "mcp__plugin_playwright_playwright__browser_network_requests",
       "Bash(gh api:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
