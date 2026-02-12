@@ -1,0 +1,36 @@
+{
+  "name": "Space Tourism - Your Gateway to the Stars",
+  "short_name": "Space Tourism",
+  "description": "Embark on an extraordinary journey through space. Explore destinations, meet your crew, and discover cutting-edge space technology.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0D17",
+  "theme_color": "#0B0D17",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./assets/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "entertainment", "lifestyle"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "scope": "/",
+  "screenshots": []
+}
+
