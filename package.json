@@ -24,7 +24,7 @@
     "url": "https://github.com/forbiddenlink/space-travel-website"
   },
   "devDependencies": {
-    "vite": "^8.0.0"
+    "vite": "^8.0.5"
   },
   "engines": {
     "node": ">=18.0.0"
