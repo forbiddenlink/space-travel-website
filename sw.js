@@ -3,8 +3,8 @@
  * Enables offline functionality and caching
  */
 
-const CACHE_NAME = 'space-tourism-v1';
-const RUNTIME_CACHE = 'space-tourism-runtime-v1';
+const CACHE_NAME = 'space-tourism-v2';
+const RUNTIME_CACHE = 'space-tourism-runtime-v2';
 
 // Assets to cache on install
 const STATIC_ASSETS = [
@@ -22,6 +22,7 @@ const STATIC_ASSETS = [
     '/tabs.js',
     '/transitions.js',
     '/utils.js',
+    '/shader-bg.js',
     '/enhancements.js',
     '/booking.js',
     '/countdown.js',
