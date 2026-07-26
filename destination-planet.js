@@ -14,8 +14,9 @@
  *   Europa: NASA/JPL/USGS Voyager–Galileo mosaic (public domain)
  *   Titan: NASA/JPL/Space Science Institute Cassini map (public domain)
  */
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// three + OrbitControls are dynamic-imported inside boot() so the ~550KB
+// library is code-split out of the destination page's critical render path.
+let THREE, OrbitControls;
 
 const canvas = document.getElementById('planet-canvas');
 const stage = canvas && canvas.closest('.planet-stage');
@@ -37,10 +38,17 @@ function hasWebGL() {
 }
 
 if (canvas && stage && main && hasWebGL()) {
-  boot();
+  // defer three's download + parse until the browser is idle post-paint
+  const start = () => boot();
+  if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 1500 });
+  else setTimeout(start, 200);
 }
 
-function boot() {
+async function boot() {
+  // lazily load three (its own code-split chunk)
+  THREE = await import('three');
+  ({ OrbitControls } = await import('three/addons/controls/OrbitControls.js'));
+
   // `?freeze` renders one static frame (for screenshots / low-power capture)
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     || /[?&]freeze/.test(location.search);
