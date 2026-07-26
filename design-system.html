@@ -3,15 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Design system</title>
+        <title>Design System &amp; Build Notes — Stellar Voyages</title>
         
         <!-- Google fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"
+        <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=optional"
             rel="stylesheet">
             
          <link rel="stylesheet" href="index.css">
+         <link rel="stylesheet" href="cinematic.css">
 
          <!-- PostHog Analytics -->
          <script>
@@ -22,8 +23,58 @@
     <body>
         
         <div class="container flow">
-            <h1 class="uppercase">Design system</h1>
-            
+            <p style="margin-top:2rem"><a class="text-accent ff-sans-cond uppercase letter-spacing-2" href="index.html">&larr; Back to site</a></p>
+            <h1 class="fs-800 ff-serif uppercase">Design System &amp; Build Notes</h1>
+
+            <!-- Case study / build notes -->
+            <section class="flow" id="build-notes" style="margin: 3rem 0 5rem; max-width: 68ch;">
+                <h2 class="numbered-title"><span>00</span> About this build</h2>
+
+                <p class="text-accent ff-sans-cond uppercase letter-spacing-2" style="margin-top:1.5rem">The brief</p>
+                <p>Stellar Voyages is a cinematic redesign of the classic multipage
+                "space tourism" challenge, rebuilt as a portfolio piece. The goal was
+                to escape the generic template look and make something that reads as
+                deliberate art direction with a couple of genuine technical showpieces,
+                while staying fast and accessible.</p>
+
+                <p class="text-accent ff-sans-cond uppercase letter-spacing-2" style="margin-top:2rem">The approach</p>
+                <p>Art direction first: a cold deep-space void, one warm ember accent for
+                calls to action, and an electric signal cyan for data and interactive
+                states. A single design-token layer re-skins every page at once; a
+                separate cinematic layer adds film grain, an edge vignette, and a
+                letterbox intro on top. Deliberate restraint too, the original build had
+                accumulated a lot of micro-effects, so part of the work was cutting noise
+                so the signature moments could breathe.</p>
+
+                <p class="text-accent ff-sans-cond uppercase letter-spacing-2" style="margin-top:2rem">Signature moments</p>
+                <ul style="padding-left:1.2rem; --flow-space:.6rem;" class="flow">
+                    <li><strong>WebGL nebula hero</strong> — a domain-warped fragment
+                    shader with a warm galactic core and pointer parallax, drifting behind
+                    the headline.</li>
+                    <li><strong>Interactive 3D planet</strong> — a real-texture Three.js
+                    sphere (Moon, Mars, Europa, Titan) you drag to rotate, with a fresnel
+                    atmosphere rim, a crossfade between worlds, and Saturn's rings when you
+                    pick Titan.</li>
+                    <li><strong>Holographic crew portrait</strong> — the astronaut tilts in
+                    3D toward the pointer over a glowing pedestal.</li>
+                </ul>
+
+                <p class="text-accent ff-sans-cond uppercase letter-spacing-2" style="margin-top:2rem">Engineering</p>
+                <p>Everything degrades gracefully. The 3D planet and shaders are
+                progressive enhancement: without WebGL, or when a visitor prefers reduced
+                motion, the page falls back to flat imagery and the render loop never
+                starts. The renderer caps its pixel ratio, pauses on tab-hide, and disposes
+                its GPU resources on teardown. Accessibility from the original build is
+                preserved, semantic HTML, ARIA tab panels, keyboard navigation, and a
+                skip link. Planet textures are license-clean (Solar System Scope, CC BY
+                4.0; NASA/JPL/USGS public domain), credited in the footer.</p>
+
+                <p class="text-accent ff-sans-cond uppercase letter-spacing-2" style="margin-top:2rem">Stack</p>
+                <p class="ff-sans-cond letter-spacing-1" style="color: hsl(var(--clr-white) / 0.75)">
+                VANILLA HTML &middot; CSS CUSTOM PROPERTIES &middot; JAVASCRIPT (ES MODULES)
+                &middot; THREE.JS &middot; VITE &middot; NO UI FRAMEWORK</p>
+            </section>
+
             <section class="flow" id="colors" style="margin: 4rem 0">
                 <h2 class="numbered-title"><span>01</span> colors</h2>
                 <div class="flex">
@@ -41,6 +92,16 @@
                         <div class="bg-white text-dark ff-serif fs-500" style="padding: 3rem 1rem 1rem; border: 1px solid white;">#FFFFFF</div>
                         <p><span class="text-accent">RGB</span> 255, 255, 255</p>
                         <p><span class="text-accent">HSL</span> 0°, 0%, 100%</p>
+                    </div>
+                    <div class="flow" style="flex-grow: 1;">
+                        <div class="ff-serif fs-500" style="padding: 3rem 1rem 1rem; border: 1px solid white; background: hsl(var(--clr-ember)); color: hsl(var(--clr-dark));">Ember</div>
+                        <p><span class="text-accent">HSL</span> 32°, 95%, 60%</p>
+                        <p style="color: hsl(var(--clr-white) / 0.6)">Warm accent &middot; CTAs</p>
+                    </div>
+                    <div class="flow" style="flex-grow: 1;">
+                        <div class="ff-serif fs-500" style="padding: 3rem 1rem 1rem; border: 1px solid white; background: hsl(var(--clr-accent)); color: hsl(var(--clr-dark));">Signal</div>
+                        <p><span class="text-accent">HSL</span> 190°, 90%, 55%</p>
+                        <p style="color: hsl(var(--clr-white) / 0.6)">Data &middot; interactive</p>
                     </div>
                 </div>
             </section>
@@ -136,6 +197,7 @@
             
             
         </div>
-        
+
+        <script src="cinematic.js" defer></script>
     </body>
 </html> 

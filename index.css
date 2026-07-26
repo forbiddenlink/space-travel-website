@@ -3,24 +3,29 @@
 /* ------------------- */
 
 :root {
-    /* colors */
-    --clr-dark: 230 35% 7%;
-    --clr-light: 231 77% 90%;
+    /* colors — cinematic cut: cold deep-space void + warm ember + electric signal */
+    --clr-dark: 230 45% 5%;          /* near-black page base, colder + deeper */
+    --clr-light: 231 77% 90%;        /* muted lavender text (#D0D6F9, kept) */
     --clr-white: 0 0% 100%;
-    --clr-accent: 185 100% 50%; /* Cyan accent for interactive elements */
+    --clr-accent: 190 90% 55%;       /* electric signal cyan — interactive/data */
 
-    /* Surface depth tokens for UI hierarchy */
-    --surface-1: hsl(230 35% 9%);
-    --surface-2: hsl(230 35% 12%);
-    --surface-3: hsl(230 35% 15%);
+    /* warm accent — cinematic gold against the cold blue (CTAs, key highlights) */
+    --clr-ember: 32 95% 60%;
+    --clr-ember-deep: 20 90% 52%;
+    --clr-signal: 190 95% 58%;       /* alias for data readouts / HUD */
 
-    /* font-sizes */
-    --fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
-    --fs-800: 3.5rem;
-    --fs-700: 1.5rem;
-    --fs-600: 1rem;
-    --fs-500: 1rem;
-    --fs-400: 0.9375rem;
+    /* Surface depth tokens for UI hierarchy (blue-tinted) */
+    --surface-1: hsl(230 38% 8%);
+    --surface-2: hsl(230 34% 11%);
+    --surface-3: hsl(230 30% 15%);
+
+    /* font-sizes — fluid cinematic scale */
+    --fs-900: clamp(5rem, 9vw + 1rem, 10rem);
+    --fs-800: clamp(3rem, 6vw + 1rem, 6.25rem);
+    --fs-700: clamp(1.5rem, 3vw + 0.5rem, 3.5rem);
+    --fs-600: clamp(1rem, 1.5vw + 0.5rem, 2rem);
+    --fs-500: clamp(1rem, 1vw + 0.5rem, 1.75rem);
+    --fs-400: clamp(0.9375rem, 0.4vw + 0.8rem, 1.125rem);
     --fs-300: 1rem;
     --fs-200: 0.875rem;
 
@@ -33,6 +38,7 @@
     --transition: 300ms ease-in-out;
     --transition-slow: 800ms cubic-bezier(0.5, 0, 0.5, 1);
     --page-transition: 600ms ease-in-out;
+    --ease-cine: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Page Transition Animation */
@@ -62,26 +68,7 @@ html {
     scroll-behavior: smooth;
 }
 
-@media (min-width: 35em) {
-    :root {
-        --fs-800: 5rem;
-        --fs-700: 2.5rem;
-        --fs-600: 1.5rem;
-        --fs-500: 1.25rem;
-        --fs-400: 1rem;
-    }
-}
-
-@media (min-width: 45em) {
-    :root {
-        /* font-sizes */
-        --fs-800: 6.25rem;
-        --fs-700: 3.5rem;
-        --fs-600: 2rem;
-        --fs-500: 1.75rem;
-        --fs-400: 1.125rem;
-    }
-}
+/* font sizes are fluid via clamp() in :root — no fixed per-breakpoint overrides */
 
 
 /* ------------------- */

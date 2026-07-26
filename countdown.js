@@ -80,9 +80,12 @@ class LaunchCountdown {
             </div>
         `;
 
-        // Insert after main content or in a specific location
+        // Prefer a reserved slot (prevents layout shift); else after main.
+        const slot = document.getElementById('countdown-slot');
         const main = document.querySelector('main');
-        if (main) {
+        if (slot) {
+            slot.appendChild(container);
+        } else if (main) {
             main.insertAdjacentElement('afterend', container);
         } else {
             document.body.appendChild(container);

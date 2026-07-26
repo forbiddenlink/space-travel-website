@@ -1,0 +1,421 @@
+/* ============================================================
+   CINEMATIC LAYER  — cinematic redesign (2026-07-25)
+   Loads AFTER index.css / booking.css / features.css.
+   Foundation atmospherics + component refinement + noise cuts.
+   Spec: docs/superpowers/specs/2026-07-25-cinematic-redesign-design.md
+   ============================================================ */
+
+:root {
+    --cine-grain-opacity: 0.05;
+    --cine-vignette: 55%;
+    --letterbox-h: clamp(1.5rem, 6vh, 4.5rem);
+}
+
+/* The reset's `img,picture{display:block}` (author origin) was overriding the UA
+   [hidden]{display:none}, so tab-hidden pictures rendered stacked (visible as
+   overlapping transparent crew portraits). Restore correct hidden semantics. */
+[hidden] { display: none !important; }
+
+/* ------------------------------------------------------------
+   1. Global film grade — vignette + grain over everything
+   ------------------------------------------------------------ */
+
+/* Vignette: darken + cool the edges for a lensed, cinematic frame */
+.cine-vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;                 /* above bg + stars (z 1), below content (z 2)… */
+    /* content sits at z-index 2; keep vignette subtle so it doesn't wash text */
+    background:
+        radial-gradient(120% 120% at 50% 42%,
+            transparent var(--cine-vignette),
+            hsl(230 60% 2% / 0.55) 100%);
+    mix-blend-mode: multiply;
+}
+/* keep interactive content above the vignette */
+.primary-header,
+main,
+.grid-container,
+.site-footer { z-index: 4; }
+
+/* Film grain: animated SVG turbulence, very low opacity, soft-light */
+.cine-grain {
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 5;
+    opacity: var(--cine-grain-opacity);
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: cine-grain-shift 0.6s steps(3) infinite;
+}
+@keyframes cine-grain-shift {
+    0%   { transform: translate(0, 0); }
+    33%  { transform: translate(-3%, 2%); }
+    66%  { transform: translate(2%, -3%); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Letterbox bars — cinematic intro that retracts once the page is ready */
+.cine-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 45vh;
+    background: hsl(230 60% 2%);
+    z-index: 60;
+    pointer-events: none;
+    transition: transform 1100ms var(--ease-cine);
+}
+.cine-bar--top    { top: 0;    transform: translateY(0); }
+.cine-bar--bottom { bottom: 0; transform: translateY(0); }
+/* once ready: bars slide off-screen leaving a thin cinematic frame feel */
+.cine-ready .cine-bar--top    { transform: translateY(calc(-100% + var(--letterbox-h))); }
+.cine-ready .cine-bar--bottom { transform: translateY(calc(100% - var(--letterbox-h))); }
+/* the thin residual frame bars stay as a permanent cinematic border */
+.cine-ready .cine-bar { height: 45vh; }
+
+/* ------------------------------------------------------------
+   2. Type refinement — cinematic hierarchy
+   ------------------------------------------------------------ */
+
+/* Hero kicker: condensed, wide-tracked, muted */
+.text-accent.ff-sans-cond {
+    color: hsl(var(--clr-light) / 0.85);
+}
+
+/* Big serif display gets a faint glow so it lifts off the void */
+.fs-900,
+.numbered-title span {
+    text-shadow: 0 0 40px hsl(var(--clr-white) / 0.08);
+}
+
+/* Section eyebrow numbers use the signal cyan, brighter */
+.numbered-title span {
+    color: hsl(var(--clr-accent) / 0.55);
+}
+
+/* Body copy: slightly cooler, better measure */
+.grid-container p:not([class]) {
+    color: hsl(var(--clr-light) / 0.9);
+    max-width: 52ch;
+}
+
+/* ------------------------------------------------------------
+   3. Ember CTA — the primary "Book Now" action reads warm
+   ------------------------------------------------------------ */
+
+.large-button {
+    background: hsl(var(--clr-white) / 0.06);
+    border: 1px solid hsl(var(--clr-ember) / 0.35);
+    box-shadow: inset 0 0 0 1px hsl(var(--clr-white) / 0.04);
+    color: hsl(var(--clr-white));
+    letter-spacing: 1px;
+}
+.large-button::after {
+    background: radial-gradient(circle at center,
+        hsl(var(--clr-ember) / 0.35) 0%,
+        transparent 65%);
+}
+.large-button:hover,
+.large-button:focus {
+    border-color: hsl(var(--clr-ember) / 0.85);
+    color: hsl(var(--clr-white));
+    box-shadow:
+        0 0 45px hsl(var(--clr-ember) / 0.35),
+        0 10px 50px hsl(230 60% 2% / 0.6);
+}
+
+/* Hero pointer parallax — copy and CTA drift on opposite depth planes */
+.grid-container--home {
+    --px: 0; --py: 0;
+}
+.grid-container--home > *:first-child {
+    transform: translate3d(calc(var(--px) * 10px), calc(var(--py) * 8px), 0);
+    transition: transform 120ms linear;
+}
+.grid-container--home > *:last-child {
+    transform: translate3d(calc(var(--px) * -18px), calc(var(--py) * -14px), 0);
+    transition: transform 120ms linear;
+}
+@media (prefers-reduced-motion: reduce) {
+    .grid-container--home > *:first-child,
+    .grid-container--home > *:last-child { transform: none; }
+}
+
+/* ------------------------------------------------------------
+   4. HUD / data-readout primitives (used by destination + counters)
+   ------------------------------------------------------------ */
+
+.hud-label {
+    font-family: var(--ff-sans-cond);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: var(--fs-200);
+    color: hsl(var(--clr-accent) / 0.75);
+}
+.hud-value {
+    font-family: var(--ff-serif);
+    font-variant-numeric: tabular-nums;
+    color: hsl(var(--clr-white));
+}
+.hud-frame {
+    position: relative;
+    padding: 1rem 1.25rem;
+    border: 1px solid hsl(var(--clr-white) / 0.08);
+    background: hsl(var(--clr-signal) / 0.02);
+}
+/* corner ticks for the cockpit-HUD feel */
+.hud-frame::before,
+.hud-frame::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid hsl(var(--clr-accent) / 0.5);
+}
+.hud-frame::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.hud-frame::after  { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+/* Restyle the existing animated counters as glowing signal readouts */
+[data-counter] {
+    color: hsl(var(--clr-white));
+    text-shadow: 0 0 20px hsl(var(--clr-accent) / 0.35);
+}
+[data-counter]:hover { color: hsl(var(--clr-accent)); }
+
+/* ------------------------------------------------------------
+   4b. Destination 3D planet stage
+   ------------------------------------------------------------ */
+
+.planet-stage {
+    grid-area: image;
+    position: relative;
+    width: min(100%, 34rem);
+    aspect-ratio: 1;
+    margin-inline: auto;
+    justify-self: center;
+    align-self: center;
+    /* soft glow pool behind the planet */
+    background: radial-gradient(circle at 50% 50%,
+        hsl(var(--clr-accent) / 0.10) 0%, transparent 62%);
+}
+.planet-stage #planet-canvas {
+    position: absolute;       /* out of flow so it can't drive stage height */
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: grab;
+    touch-action: pan-y;      /* allow vertical page scroll, grab horizontal */
+}
+.planet-stage #planet-canvas:active { cursor: grabbing; }
+
+.planet-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 0.25rem;
+    transform: translateX(-50%);
+    font-family: var(--ff-sans-cond);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: var(--fs-200);
+    color: hsl(var(--clr-white) / 0.4);
+    pointer-events: none;
+    opacity: 0;
+    animation: planet-hint-in 600ms var(--ease-cine) 900ms forwards;
+}
+@keyframes planet-hint-in { to { opacity: 1; } }
+
+/* when the 3D planet is live, hide the flat <picture> fallbacks */
+.has-planet > picture { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+    .planet-hint { animation: none; opacity: 1; }
+}
+
+/* ------------------------------------------------------------
+   4c. Destination meta → HUD readouts
+   ------------------------------------------------------------ */
+
+.destination-meta {
+    border-top: 1px solid hsl(var(--clr-accent) / 0.18);
+    gap: 2rem;
+}
+.destination-meta h3 {
+    font-family: var(--ff-sans-cond);
+    letter-spacing: 3px;
+    color: hsl(var(--clr-accent) / 0.8);
+}
+.destination-meta p {
+    text-shadow: 0 0 24px hsl(var(--clr-accent) / 0.3);
+}
+
+/* ------------------------------------------------------------
+   4d. Crew — holographic pointer-tilt portrait
+   ------------------------------------------------------------ */
+
+.grid-container--crew { perspective: 1200px; }
+
+.grid-container--crew > picture {
+    --rx: 0deg; --ry: 0deg; --sheen-x: 50%;
+    position: relative;
+    overflow: visible;                 /* override index.css clip */
+    border-radius: 0;
+    border-bottom: 0;                  /* drop the old hairline under portrait */
+    animation: none !important;        /* stop the float keyframe fighting tilt */
+    transform: rotateX(var(--rx)) rotateY(var(--ry));
+    transition: transform 260ms var(--ease-cine), filter 260ms ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+    filter: drop-shadow(0 26px 55px hsl(230 60% 2% / 0.65));
+}
+.grid-container--crew > picture:hover {
+    filter: drop-shadow(0 26px 55px hsl(230 60% 2% / 0.7))
+            drop-shadow(0 0 30px hsl(var(--clr-accent) / 0.25));
+}
+
+/* holographic pedestal glow behind the (transparent) astronaut cutout */
+.grid-container--crew > picture::after {
+    content: '';
+    position: absolute;
+    inset: auto;                       /* override index.css inset:0 */
+    left: var(--sheen-x);
+    bottom: -4%;
+    width: 60%;
+    height: 18%;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center,
+        hsl(var(--clr-accent) / 0.42) 0%, transparent 68%);
+    filter: blur(16px);
+    opacity: 1;                        /* index.css starts this at 0 */
+    z-index: -1;
+    pointer-events: none;
+    transition: left 260ms var(--ease-cine);
+}
+.grid-container--crew > picture:hover::after { opacity: 1; }
+
+/* crew role/name typography */
+.crew-details header h2 { color: hsl(var(--clr-light) / 0.6); }
+.crew-details header p {
+    text-shadow: 0 0 30px hsl(var(--clr-white) / 0.12);
+}
+
+/* active crew dot glows signal-cyan */
+.dot-indicators > [aria-selected="true"] {
+    background-color: hsl(var(--clr-accent));
+    box-shadow: 0 0 16px hsl(var(--clr-accent) / 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .grid-container--crew > picture { transform: none; transition: none; }
+}
+
+/* ------------------------------------------------------------
+   4e. Technology — HUD framing + ember step indicators
+   ------------------------------------------------------------ */
+
+/* landscape tech image gets a framed, cockpit-panel feel */
+.grid-container--technology > picture {
+    position: relative;
+    border-bottom: 0;
+    border: 1px solid hsl(var(--clr-accent) / 0.15);
+    box-shadow: inset 0 0 60px hsl(230 60% 2% / 0.6);
+}
+.grid-container--technology > picture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        linear-gradient(hsl(var(--clr-accent) / 0.5) 0 0) left top / 14px 1px no-repeat,
+        linear-gradient(hsl(var(--clr-accent) / 0.5) 0 0) left top / 1px 14px no-repeat,
+        linear-gradient(hsl(var(--clr-accent) / 0.5) 0 0) right bottom / 14px 1px no-repeat,
+        linear-gradient(hsl(var(--clr-accent) / 0.5) 0 0) right bottom / 1px 14px no-repeat;
+    z-index: 2;
+}
+
+/* numbered step buttons: active = ember-filled, cinematic */
+.number-indicators > * {
+    font-family: var(--ff-serif);
+    border-color: hsl(var(--clr-white) / 0.2);
+    transition: border-color var(--transition), background-color var(--transition),
+                box-shadow var(--transition), color var(--transition);
+}
+.technology .number-indicators > *:hover,
+.technology .number-indicators > *:focus {
+    border-color: hsl(var(--clr-accent) / 0.7);
+}
+.technology .number-indicators > [aria-selected="true"] {
+    background: hsl(var(--clr-accent));
+    color: hsl(var(--clr-dark));
+    border-color: hsl(var(--clr-accent));
+    box-shadow: 0 0 26px hsl(var(--clr-accent) / 0.45);
+}
+.technology-info h2 { text-shadow: 0 0 30px hsl(var(--clr-white) / 0.12); }
+.technology-info .text-accent { color: hsl(var(--clr-accent) / 0.85); }
+
+/* ------------------------------------------------------------
+   5. Navigation refinement — signal underline, cooler glass
+   ------------------------------------------------------------ */
+
+.primary-navigation {
+    background: hsl(230 45% 5% / 0.35);
+    -webkit-backdrop-filter: blur(2rem) saturate(140%);
+    backdrop-filter: blur(2rem) saturate(140%);
+    border-block: 1px solid hsl(var(--clr-white) / 0.06);
+}
+.primary-navigation a::after {
+    background: linear-gradient(90deg,
+        hsl(var(--clr-ember)), hsl(var(--clr-accent)));
+}
+
+/* ------------------------------------------------------------
+   6. NOISE CUTS — quiet the accreted kitchen-sink effects
+   ------------------------------------------------------------ */
+
+/* Custom cursor: remove entirely (gimmicky, hurts accessibility) */
+.custom-cursor { display: none !important; }
+
+/* Ripple: neutralize the flashing white ripple burst */
+.ripple-effect { display: none !important; }
+
+/* The two full-viewport twinkling star pseudo-layers on body are redundant
+   with the WebGL hero + parallax stars — tone them way down so they read as
+   faint depth, not visual noise. */
+.home::before, .destination::before, .crew::before, .technology::before,
+.home::after,  .destination::after,  .crew::after,  .technology::after {
+    opacity: 0.25;
+}
+
+/* Reserve space for the injected launch countdown so it can't shift the footer */
+.countdown-slot { min-height: 300px; display: block; }
+@media (max-width: 45em) { .countdown-slot { min-height: 440px; } }
+.countdown-slot .countdown-container { margin-top: 0; }
+
+/* Heavy "Preparing for launch…" overlay → fast, quiet crossfade */
+.loading-indicator { transition: opacity 200ms ease; }
+.loading-indicator .loading-spinner {
+    border-top-color: hsl(var(--clr-ember));
+    width: 42px; height: 42px;
+}
+.loading-indicator p { letter-spacing: 3px; opacity: 0.7; }
+
+/* Footer: warm hairline instead of cyan */
+.site-footer { border-top: 1px solid hsl(var(--clr-ember) / 0.14); }
+.footer-section h3 { color: hsl(var(--clr-light) / 0.9); }
+
+/* ------------------------------------------------------------
+   7. Reduced motion / no-JS fallbacks
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+    .cine-grain { animation: none; }
+    .cine-bar { display: none; }               /* no letterbox intro */
+}
+
+/* If JS never runs, don't leave the page hidden behind letterbox bars */
+.no-js .cine-bar { display: none; }

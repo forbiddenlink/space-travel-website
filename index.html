@@ -49,13 +49,14 @@
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=optional"
       rel="stylesheet">
       
   <!-- Our custom CSS -->
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="booking.css">
   <link rel="stylesheet" href="features.css">
+  <link rel="stylesheet" href="cinematic.css">
   <title>Space Tourism - Your Gateway to the Stars</title>
   <script src="navigation.js" defer></script>
   <script src="transitions.js" defer></script>
@@ -91,14 +92,17 @@
       <h1 class="text-accent fs-500 ff-sans-cond uppercase letter-spacing-1">So, you want to travel to
       <span class="d-block fs-900 ff-serif text-white">Space</span></h1>
       
-      <p>Let's face it; if you want to go to space, you might as well genuinely go to 
-      outer space and not hover kind of on the edge of it. Well sit back, and relax 
-      because we'll give you a truly out of this world experience!</p>
+      <p>No half measures, no edge-of-atmosphere compromises. We take you all the
+      way out, past the blue line and into the dark. Strap in and let the void
+      do the rest.</p>
     </div>
     <div>
       <a href="#" class="large-button uppercase ff-serif text-dark bg-white" data-booking-trigger data-tooltip="Begin Your Space Journey">Book Now</a>
     </div>
   </main>
+
+  <!-- Reserved slot for the injected launch countdown (prevents layout shift) -->
+  <div id="countdown-slot" class="countdown-slot"></div>
 
   <!-- Background stars with parallax effect -->
   <div class="stars-container parallax" data-speed="0.3" aria-hidden="true">
@@ -173,6 +177,7 @@
     </div>
   </footer>
 
+  <script src="cinematic.js" defer></script>
   <script src="shader-bg.js" defer></script>
   <script src="enhancements.js" defer></script>
   <script src="booking.js" defer></script>

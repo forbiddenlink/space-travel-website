@@ -35,14 +35,16 @@
   <!-- Google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=optional"
       rel="stylesheet">
       
   <!-- Our custom CSS -->
   <link rel="stylesheet" href="index.css">
   <link rel="stylesheet" href="booking.css">
   <link rel="stylesheet" href="features.css">
+  <link rel="stylesheet" href="cinematic.css">
   <title>Destinations - Space Tourism</title>
+  <script src="cinematic.js" defer></script>
   <script src="navigation.js" defer></script>
   <script src="tabs.js" defer></script>
   <script src="transitions.js" defer></script>
@@ -91,8 +93,14 @@
       <source srcset="assets/destination/image-titan.webp" type="image/webp">
       <img src="assets/destination/image-titan.png" alt="the moon titan" width="480" height="480" loading="lazy">
     </picture>
-    
-    
+
+    <!-- 3D planet — replaces the flat images when WebGL + motion are available -->
+    <div class="planet-stage" aria-hidden="true">
+      <canvas id="planet-canvas"></canvas>
+      <span class="planet-hint">drag to rotate</span>
+    </div>
+
+
     <div class="tab-list underline-indicators flex" role="tablist" aria-label="destination list">
         <button aria-selected="true" role="tab" aria-controls="moon-tab" class="uppercase ff-sans-cond text-accent letter-spacing-2" tabindex="0" data-image="moon-image">Moon</button>
         <button aria-selected="false" role="tab" aria-controls="mars-tab" class="uppercase ff-sans-cond text-accent letter-spacing-2" tabindex="-1" data-image="mars-image">Mars</button>
@@ -104,9 +112,9 @@
     <article class="destination-info flow" id="moon-tab" tabindex="0" role="tabpanel">
       <h2 class="fs-800 uppercase ff-serif">Moon</h2>
 
-      <p>See our planet as you’ve never seen it before. A perfect relaxing trip away to help 
-      regain perspective and come back refreshed. While you’re there, take in some history 
-      by visiting the Luna 2 and Apollo 11 landing sites.</p>
+      <p>Watch your own planet shrink to a pale marble outside the window. It’s the easiest kind
+      of escape: close enough for a quick recharge, far enough to feel like leaving it all
+      behind. History waits too, at the untouched Luna 2 and Apollo 11 landing sites.</p>
       
       <div class="destination-meta flex">
         <div>
@@ -124,9 +132,9 @@
     <article hidden class="destination-info flow" id="mars-tab" tabindex="0"  role="tabpanel">
       <h2 class="fs-800 uppercase ff-serif">Mars</h2>
 
-      <p>Don’t forget to pack your hiking boots. You’ll need them to tackle Olympus Mons, 
-  the tallest planetary mountain in our solar system. It’s two and a half times 
-  the size of Everest!</p>
+      <p>Bring boots built for real ground. Your trail leads up Olympus Mons, the tallest
+  mountain in the solar system and two and a half times the height of Everest.
+  Consider it the ultimate hike.</p>
       
       <div class="destination-meta flex">
         <div>
@@ -144,10 +152,9 @@
     <article hidden class="destination-info flow" id="europa-tab" tabindex="0"  role="tabpanel">
       <h2 class="fs-800 uppercase ff-serif">Europa</h2>
 
-      <p>The smallest of the four Galilean moons orbiting Jupiter, Europa is a 
-  winter lover’s dream. With an icy surface, it’s perfect for a bit of 
-  ice skating, curling, hockey, or simple relaxation in your snug 
-  wintery cabin.</p>
+      <p>Smallest of Jupiter’s four Galilean moons, Europa is one long winter. Its frozen
+  surface is built for skating, curling, hockey, or simply doing nothing at all
+  from a snug cabin window. Bring warm layers and an appetite for quiet.</p>
       <div class="destination-meta flex">
         <div>
           <h3 class="text-accent fs-200 uppercase">Avg. distance</h3>
@@ -164,9 +171,9 @@
     <article hidden class="destination-info flow" id="titan-tab" tabindex="0"  role="tabpanel">
       <h2 class="fs-800 uppercase ff-serif">Titan</h2>
 
-      <p>The only moon known to have a dense atmosphere other than Earth, Titan 
-  is a home away from home (just a few hundred degrees colder!). As a 
-  bonus, you get striking views of the Rings of Saturn.</p>
+      <p>Titan is the only moon with a dense atmosphere to rival Earth’s, a strange
+  kind of home away from home, just a few hundred degrees colder. Step outside
+  and Saturn’s rings fill the sky. Few views in the solar system come close.</p>
       
       <div class="destination-meta flex">
         <div>
@@ -244,11 +251,16 @@
       <p style="margin-top: 0.5rem; font-size: 0.75rem;">
         Fictional Company • Portfolio Project • Built with Vanilla HTML, CSS & JavaScript
       </p>
+      <p style="margin-top: 0.5rem; font-size: 0.7rem; opacity: 0.7;">
+        Planet textures: Moon &amp; Mars © <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener">Solar System Scope</a> (CC BY 4.0);
+        Europa &amp; Titan courtesy NASA/JPL/USGS (public domain).
+      </p>
     </div>
   </footer>
 
   <script src="enhancements.js" defer></script>
   <script src="booking.js" defer></script>
   <script src="faq.js" defer></script>
+  <script type="module" src="destination-planet.js"></script>
 </body>
 </html>
