@@ -1,6 +1,6 @@
 # Space Tourism Website 🚀
 
-A modern, fully responsive space tourism website showcasing destinations, crew members, and cutting-edge space technology. Built with vanilla HTML, CSS, and JavaScript, featuring smooth animations, accessibility features, and optimal performance.
+A cinematic, portfolio-grade space tourism website showcasing destinations, crew members, and cutting-edge space technology. Built with vanilla HTML, CSS, and JavaScript (no UI framework) plus Vite and Three.js. Signature moments include a WebGL nebula hero with pointer parallax and an interactive 3D planet you can drag to rotate, all with progressive enhancement, accessibility, and reduced-motion fallbacks.
 
 ![Space Tourism Website](./assets/shared/logo.svg)
 
@@ -43,6 +43,7 @@ A modern, fully responsive space tourism website showcasing destinations, crew m
 - **CSS3** - Modern features (Grid, Flexbox, Custom Properties, Animations, Backdrop Filters)
 - **JavaScript (ES6+)** - Vanilla JS with modern patterns (IntersectionObserver, PerformanceObserver)
 - **Vite** - Fast development server and optimized builds
+- **Three.js** - Interactive WebGL 3D planet on the destinations page
 
 ## 📋 Prerequisites
 
@@ -218,6 +219,16 @@ Content is stored in [data.json](data.json) with the following structure:
 - **technology**: Array of technology objects (name, images, description)
 
 All images are available in both PNG and WebP formats for optimal performance.
+
+## 🎨 Credits & Attribution
+
+Planet textures on the interactive 3D destination globe:
+
+- **Moon, Mars** — [Solar System Scope](https://www.solarsystemscope.com/textures/), licensed CC BY 4.0.
+- **Europa** — NASA / JPL / USGS Voyager and Galileo global mosaic (public domain).
+- **Titan** — NASA / JPL / Space Science Institute Cassini map (public domain).
+
+3D rendering by [Three.js](https://threejs.org). Typefaces: Bellefair, Barlow, and Barlow Condensed via Google Fonts.
 
 ## 🔒 License
 
