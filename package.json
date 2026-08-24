@@ -29,10 +29,10 @@
     "url": "https://github.com/forbiddenlink/space-travel-website"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.8",
+    "@biomejs/biome": "^2.5.9",
     "jsdom": "^29.1.1",
-    "vite": "^8.2.1",
-    "vitest": "^4.1.10"
+    "vite": "^8.2.2",
+    "vitest": "^4.1.11"
   },
   "engines": {
     "node": ">=18.0.0"
