@@ -13,7 +13,10 @@
     "biome:fix": "biome check . --write",
     "biome:format": "biome format . --write",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "check": "pnpm biome:check && pnpm test:run && pnpm build",
+    "security": "pnpm audit --audit-level high",
+    "audit": "pnpm audit --audit-level high"
   },
   "keywords": [
     "space",
@@ -40,5 +43,10 @@
   "private": true,
   "dependencies": {
     "three": "^0.185.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "nanoid": "3.3.18"
+    }
   }
 }

@@ -3,37 +3,37 @@
    the display type and body copy are ready at first paint (no swap reflow). */
 
 @font-face {
-  font-family: 'Bellefair';
+  font-family: "Bellefair";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/bellefair-400.woff2') format('woff2');
+  src: url("/fonts/bellefair-400.woff2") format("woff2");
 }
 @font-face {
-  font-family: 'Barlow';
+  font-family: "Barlow";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/barlow-400.woff2') format('woff2');
+  src: url("/fonts/barlow-400.woff2") format("woff2");
 }
 @font-face {
-  font-family: 'Barlow';
+  font-family: "Barlow";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/fonts/barlow-700.woff2') format('woff2');
+  src: url("/fonts/barlow-700.woff2") format("woff2");
 }
 @font-face {
-  font-family: 'Barlow Condensed';
+  font-family: "Barlow Condensed";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/fonts/barlowcondensed-400.woff2') format('woff2');
+  src: url("/fonts/barlowcondensed-400.woff2") format("woff2");
 }
 @font-face {
-  font-family: 'Barlow Condensed';
+  font-family: "Barlow Condensed";
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('/fonts/barlowcondensed-700.woff2') format('woff2');
+  src: url("/fonts/barlowcondensed-700.woff2") format("woff2");
 }

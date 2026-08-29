@@ -5,35 +5,35 @@
 
 class BookingSystem {
   constructor() {
-    this.currentStep = 1;
-    this.totalSteps = 4;
+    this.currentStep = 1
+    this.totalSteps = 4
     this.formData = {
-      destination: "",
+      destination: '',
       passengers: 1,
-      departureDate: "",
-      returnDate: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      specialRequests: "",
-    };
+      departureDate: '',
+      returnDate: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      specialRequests: '',
+    }
 
-    this.init();
+    this.init()
   }
 
   init() {
-    this.createBookingModal();
-    this.attachEventListeners();
+    this.createBookingModal()
+    this.attachEventListeners()
   }
 
   createBookingModal() {
-    const modal = document.createElement("div");
-    modal.className = "booking-modal";
-    modal.id = "booking-modal";
-    modal.setAttribute("role", "dialog");
-    modal.setAttribute("aria-labelledby", "booking-title");
-    modal.setAttribute("aria-modal", "true");
+    const modal = document.createElement('div')
+    modal.className = 'booking-modal'
+    modal.id = 'booking-modal'
+    modal.setAttribute('role', 'dialog')
+    modal.setAttribute('aria-labelledby', 'booking-title')
+    modal.setAttribute('aria-modal', 'true')
 
     modal.innerHTML = `
             <div class="booking-modal-overlay"></div>
@@ -203,181 +203,167 @@ class BookingSystem {
                     </div>
                 </form>
             </div>
-        `;
+        `
 
-    document.body.appendChild(modal);
+    document.body.appendChild(modal)
   }
 
   attachEventListeners() {
     // Open booking modal
-    const bookButtons = document.querySelectorAll("[data-booking-trigger]");
+    const bookButtons = document.querySelectorAll('[data-booking-trigger]')
     bookButtons.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        this.openModal();
-      });
-    });
+      btn.addEventListener('click', (e) => {
+        e.preventDefault()
+        this.openModal()
+      })
+    })
 
     // Close modal
-    const closeBtn = document.querySelector(".booking-close");
-    const overlay = document.querySelector(".booking-modal-overlay");
+    const closeBtn = document.querySelector('.booking-close')
+    const overlay = document.querySelector('.booking-modal-overlay')
 
-    closeBtn?.addEventListener("click", () => this.closeModal());
-    overlay?.addEventListener("click", () => this.closeModal());
+    closeBtn?.addEventListener('click', () => this.closeModal())
+    overlay?.addEventListener('click', () => this.closeModal())
 
     // Form navigation
-    document
-      .getElementById("btn-next")
-      ?.addEventListener("click", () => this.nextStep());
-    document
-      .getElementById("btn-prev")
-      ?.addEventListener("click", () => this.prevStep());
-    document
-      .getElementById("booking-form")
-      ?.addEventListener("submit", (e) => this.handleSubmit(e));
+    document.getElementById('btn-next')?.addEventListener('click', () => this.nextStep())
+    document.getElementById('btn-prev')?.addEventListener('click', () => this.prevStep())
+    document.getElementById('booking-form')?.addEventListener('submit', (e) => this.handleSubmit(e))
 
     // Update pricing when destination changes
-    const destinationInputs = document.querySelectorAll(
-      'input[name="destination"]',
-    );
+    const destinationInputs = document.querySelectorAll('input[name="destination"]')
     destinationInputs.forEach((input) => {
-      input.addEventListener("change", () => this.updatePricing());
-    });
+      input.addEventListener('change', () => this.updatePricing())
+    })
 
     // Keyboard navigation
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") this.closeModal();
-    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') this.closeModal()
+    })
   }
 
   openModal() {
-    const modal = document.getElementById("booking-modal");
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
+    const modal = document.getElementById('booking-modal')
+    modal.classList.add('active')
+    document.body.style.overflow = 'hidden'
 
     // Focus first input
     setTimeout(() => {
-      const firstInput = modal.querySelector("input");
-      firstInput?.focus();
-    }, 100);
+      const firstInput = modal.querySelector('input')
+      firstInput?.focus()
+    }, 100)
   }
 
   closeModal() {
-    const modal = document.getElementById("booking-modal");
-    modal.classList.remove("active");
-    document.body.style.overflow = "";
-    this.currentStep = 1;
-    this.updateStepDisplay();
+    const modal = document.getElementById('booking-modal')
+    modal.classList.remove('active')
+    document.body.style.overflow = ''
+    this.currentStep = 1
+    this.updateStepDisplay()
   }
 
   nextStep() {
-    if (!this.validateCurrentStep()) return;
+    if (!this.validateCurrentStep()) return
 
-    this.saveCurrentStepData();
+    this.saveCurrentStepData()
 
     if (this.currentStep < this.totalSteps) {
-      this.currentStep++;
-      this.updateStepDisplay();
+      this.currentStep++
+      this.updateStepDisplay()
 
       if (this.currentStep === 4) {
-        this.updateSummary();
+        this.updateSummary()
       }
     }
   }
 
   prevStep() {
     if (this.currentStep > 1) {
-      this.currentStep--;
-      this.updateStepDisplay();
+      this.currentStep--
+      this.updateStepDisplay()
     }
   }
 
   validateCurrentStep() {
-    const currentStepEl = document.querySelector(
-      `.booking-step[data-step="${this.currentStep}"]`,
-    );
+    const currentStepEl = document.querySelector(`.booking-step[data-step="${this.currentStep}"]`)
     const inputs = currentStepEl.querySelectorAll(
-      "input[required], select[required], textarea[required]",
-    );
+      'input[required], select[required], textarea[required]'
+    )
 
-    let isValid = true;
+    let isValid = true
     inputs.forEach((input) => {
       if (!input.checkValidity()) {
-        input.reportValidity();
-        isValid = false;
+        input.reportValidity()
+        isValid = false
       }
-    });
+    })
 
-    return isValid;
+    return isValid
   }
 
   saveCurrentStepData() {
-    const currentStepEl = document.querySelector(
-      `.booking-step[data-step="${this.currentStep}"]`,
-    );
-    const inputs = currentStepEl.querySelectorAll("input, select, textarea");
+    const currentStepEl = document.querySelector(`.booking-step[data-step="${this.currentStep}"]`)
+    const inputs = currentStepEl.querySelectorAll('input, select, textarea')
 
     inputs.forEach((input) => {
       if (input.name) {
-        this.formData[input.name] = input.value;
+        this.formData[input.name] = input.value
       }
-    });
+    })
   }
 
   updateStepDisplay() {
     // Update steps
-    document.querySelectorAll(".booking-step").forEach((step) => {
-      step.classList.remove("active");
-    });
+    document.querySelectorAll('.booking-step').forEach((step) => {
+      step.classList.remove('active')
+    })
     document
       .querySelector(`.booking-step[data-step="${this.currentStep}"]`)
-      ?.classList.add("active");
+      ?.classList.add('active')
 
     // Update progress indicators
-    document.querySelectorAll(".progress-step").forEach((step, index) => {
+    document.querySelectorAll('.progress-step').forEach((step, index) => {
       if (index < this.currentStep) {
-        step.classList.add("active", "completed");
+        step.classList.add('active', 'completed')
       } else if (index === this.currentStep - 1) {
-        step.classList.add("active");
-        step.classList.remove("completed");
+        step.classList.add('active')
+        step.classList.remove('completed')
       } else {
-        step.classList.remove("active", "completed");
+        step.classList.remove('active', 'completed')
       }
-    });
+    })
 
     // Update buttons
-    const prevBtn = document.getElementById("btn-prev");
-    const nextBtn = document.getElementById("btn-next");
-    const submitBtn = document.getElementById("btn-submit");
+    const prevBtn = document.getElementById('btn-prev')
+    const nextBtn = document.getElementById('btn-next')
+    const submitBtn = document.getElementById('btn-submit')
 
-    prevBtn.style.display = this.currentStep === 1 ? "none" : "block";
-    nextBtn.style.display =
-      this.currentStep === this.totalSteps ? "none" : "block";
-    submitBtn.style.display =
-      this.currentStep === this.totalSteps ? "block" : "none";
+    prevBtn.style.display = this.currentStep === 1 ? 'none' : 'block'
+    nextBtn.style.display = this.currentStep === this.totalSteps ? 'none' : 'block'
+    submitBtn.style.display = this.currentStep === this.totalSteps ? 'block' : 'none'
   }
 
   updateSummary() {
     const destinationNames = {
-      moon: "Moon",
-      mars: "Mars",
-      europa: "Europa",
-      titan: "Titan",
-    };
+      moon: 'Moon',
+      mars: 'Mars',
+      europa: 'Europa',
+      titan: 'Titan',
+    }
 
-    document.getElementById("summary-destination").textContent =
-      destinationNames[this.formData.destination] || "-";
+    document.getElementById('summary-destination').textContent =
+      destinationNames[this.formData.destination] || '-'
 
-    document.getElementById("summary-dates").textContent =
-      `${this.formatDate(this.formData.departureDate)} - ${this.formatDate(this.formData.returnDate)}`;
+    document.getElementById('summary-dates').textContent =
+      `${this.formatDate(this.formData.departureDate)} - ${this.formatDate(this.formData.returnDate)}`
 
-    document.getElementById("summary-passengers").textContent =
-      `${this.formData.passengers} ${this.formData.passengers === "1" ? "Passenger" : "Passengers"}`;
+    document.getElementById('summary-passengers').textContent =
+      `${this.formData.passengers} ${this.formData.passengers === '1' ? 'Passenger' : 'Passengers'}`
 
-    document.getElementById("summary-contact").textContent =
-      `${this.formData.firstName} ${this.formData.lastName}\n${this.formData.email}`;
+    document.getElementById('summary-contact').textContent =
+      `${this.formData.firstName} ${this.formData.lastName}\n${this.formData.email}`
 
-    this.updatePricing();
+    this.updatePricing()
   }
 
   updatePricing() {
@@ -386,28 +372,27 @@ class BookingSystem {
       mars: 500000,
       europa: 1200000,
       titan: 2000000,
-    };
+    }
 
-    const basePrice = prices[this.formData.destination] || 0;
-    const passengers = parseInt(this.formData.passengers) || 1;
-    const total = basePrice * passengers;
+    const basePrice = prices[this.formData.destination] || 0
+    const passengers = parseInt(this.formData.passengers) || 1
+    const total = basePrice * passengers
 
-    document.getElementById("summary-total").textContent =
-      `$${total.toLocaleString()}`;
+    document.getElementById('summary-total').textContent = `$${total.toLocaleString()}`
   }
 
   handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     // Save all data
-    this.saveCurrentStepData();
+    this.saveCurrentStepData()
 
     // Show success message
-    this.showSuccessMessage();
+    this.showSuccessMessage()
   }
 
   showSuccessMessage() {
-    const modal = document.querySelector(".booking-modal-content");
+    const modal = document.querySelector('.booking-modal-content')
     modal.innerHTML = `
             <div class="booking-success">
                 <div class="success-icon">🚀</div>
@@ -419,28 +404,28 @@ class BookingSystem {
                     Close
                 </button>
             </div>
-        `;
+        `
   }
 
   getMinDate() {
-    const today = new Date();
-    today.setDate(today.getDate() + 7); // Minimum 7 days in advance
-    return today.toISOString().split("T")[0];
+    const today = new Date()
+    today.setDate(today.getDate() + 7) // Minimum 7 days in advance
+    return today.toISOString().split('T')[0]
   }
 
   formatDate(dateStr) {
-    if (!dateStr) return "-";
-    const date = new Date(dateStr);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    if (!dateStr) return '-'
+    const date = new Date(dateStr)
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
   }
 }
 
 // Initialize booking system on page load
-document.addEventListener("DOMContentLoaded", () => {
-  window.bookingSystem = new BookingSystem();
-  console.log("🎫 Booking system initialized");
-});
+document.addEventListener('DOMContentLoaded', () => {
+  window.bookingSystem = new BookingSystem()
+  console.log('🎫 Booking system initialized')
+})

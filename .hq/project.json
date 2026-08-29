@@ -1,0 +1,20 @@
+{
+  "name": "space-travel-website",
+  "context": "personal",
+  "ownerContext": "personal",
+  "kind": "app",
+  "surface": "product",
+  "lifecycle": "prototype",
+  "systems": ["solo-control-tower"],
+  "tags": ["biome", "vitest"],
+  "hosting": [],
+  "observability": [],
+  "automationLevel": "manual",
+  "confidentialContext": "none",
+  "allowedForCodex": true,
+  "urls": {
+    "repository": "https://github.com/forbiddenlink/space-travel-website"
+  },
+  "lastReviewedAt": "2026-08-27",
+  "notes": "Prototype website. Safe to include in broad quality, visual, and static-site cleanup passes."
+}
