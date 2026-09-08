@@ -4,10 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  nanoid: 3.3.18
-  undici: '>=7.28.0'
-
 importers:
 
   .:
@@ -17,7 +13,7 @@ importers:
         version: 0.185.1
     devDependencies:
       '@biomejs/biome':
-        specifier: ^2.5.12
+        specifier: 2.5.12
         version: 2.5.12
       jsdom:
         specifier: ^29.1.1
