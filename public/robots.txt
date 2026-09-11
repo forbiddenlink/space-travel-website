@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://space-travel-website-theta.vercel.app/sitemap.xml
+
