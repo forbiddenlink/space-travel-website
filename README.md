@@ -1,244 +1,111 @@
-# Space Tourism Website 🚀
+# Space Tourism Website
 
-A cinematic, portfolio-grade space tourism website showcasing destinations, crew members, and cutting-edge space technology. Built with vanilla HTML, CSS, and JavaScript (no UI framework) plus Vite and Three.js. Signature moments include a WebGL nebula hero with pointer parallax and an interactive 3D planet you can drag to rotate, all with progressive enhancement, accessibility, and reduced-motion fallbacks.
+A cinematic, portfolio-grade space tourism site: destinations, crew, and technology, built with
+vanilla HTML, CSS, and JavaScript (no UI framework) plus Vite and Three.js. Signature moments:
+a WebGL nebula hero with pointer parallax, and an interactive 3D planet you can drag to rotate
+on the destination pages, all with progressive enhancement, accessibility, and reduced-motion
+fallbacks.
 
 ![Space Tourism Website](./assets/shared/logo.svg)
 
-## ✨ Features
+## Features
 
-### Core Functionality
-- 🌍 **Interactive Destinations** - Explore Moon, Mars, Europa, and Titan with detailed information
-- 👨‍🚀 **Crew Profiles** - Meet your expert space crew members
-- 🚀 **Technology Showcase** - Learn about launch vehicles, spaceports, and space capsules
-- 📱 **Fully Responsive** - Optimized for mobile, tablet, and desktop devices
-- ♿ **Accessible** - WCAG compliant with keyboard navigation and screen reader support
+- Interactive destination, crew, and technology pages, each with tab navigation
+- Draggable Three.js 3D planet on destination pages (crossfades textures per tab, falls back to
+  flat PNG/WebP when reduced-motion is set or WebGL is unavailable)
+- WebGL nebula hero background with pointer parallax
+- Accessible: semantic HTML, ARIA attributes, skip-to-content link, keyboard navigation
+  (Tab/Escape/Arrow keys), focus-visible states
+- Scroll reveal animations, animated counters, ripple effects, image hover effects
+- SEO: meta tags, Open Graph, Twitter Cards, `robots.txt`, `sitemap.xml`
+- PWA manifest + service worker
+- Dedicated design system page (`design-system.html`)
 
-### Visual Effects & Animations
-- ✨ **Twinkling Star Background** - Dynamic animated starfield with parallax scrolling
-- 🎭 **Smooth Page Transitions** - Seamless navigation with loading indicators
-- 🎪 **Scroll Reveal Animations** - Elements fade in as you scroll
-- 🎯 **Interactive Hover Effects** - Enhanced feedback on buttons and links with ripple effects
-- 🖼️ **Image Hover Effects** - Smooth scale and translate transformations
-- 🎨 **Staggered List Animations** - Sequential fade-in for navigation indicators
+## Stack
 
-### User Experience
-- 🔝 **Back to Top Button** - Quick navigation on long pages
-- 📊 **Progress Indicator** - Visual scroll progress bar with gradient effect
-- 💡 **Tooltips** - Hover information on navigation items
-- 🎨 **Loading Animations** - Smooth transitions between pages with "Preparing for launch..." indicator
-- ⚡ **Lazy Loading** - Images load as needed with skeleton screens
-- 🎪 **Animated Counters** - Numbers animate when scrolling into view
+- Vite 8, Vitest 4 (jsdom), Biome 2 (lint + format), Three.js 0.185
+- No framework, no TypeScript. Multi-page app: each page is a standalone HTML file wired
+  through `vite.config.js`'s `rollupOptions.input`.
+- Node >=18. Package manager: **pnpm** (`pnpm-lock.yaml` is the lockfile; there is no
+  `package-lock.json`).
 
-### Technical Features
-- 🎯 **Tab Navigation** - Accessible tab interface with keyboard support (Arrow keys)
-- 📱 **Mobile Navigation** - Hamburger menu with smooth transitions, click-outside to close, and Escape key support
-- 🔍 **SEO Optimized** - Meta tags, Open Graph, Twitter Cards, robots.txt, and sitemap.xml
-- 🚀 **Performance Monitoring** - Core Web Vitals tracking (development mode)
-- 📝 **PWA Ready** - Web app manifest included
-- 🎨 **Design System** - Dedicated design system page showcasing colors, typography, and components
-
-## 🛠 Technologies Used
-
-- **HTML5** - Semantic markup
-- **CSS3** - Modern features (Grid, Flexbox, Custom Properties, Animations, Backdrop Filters)
-- **JavaScript (ES6+)** - Vanilla JS with modern patterns (IntersectionObserver, PerformanceObserver)
-- **Vite** - Fast development server and optimized builds
-- **Three.js** - Interactive WebGL 3D planet on the destinations page
-
-## 📋 Prerequisites
-
-- Node.js (v18.0.0 or higher)
-- npm
-
-## 🚀 Getting Started
-
-### Installation
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/forbiddenlink/space-travel-website.git
-cd space-travel-website
-```
-
-2. **Install dependencies**
-```bash
-npm install
-```
-
-3. **Start the development server**
-```bash
-npm run dev
-# or
-npm start
-```
-
-4. **Open your browser**
-```
-http://localhost:5173
-```
-
-### Build for Production
+## Quickstart
 
 ```bash
-npm run build
+pnpm install
+pnpm dev          # vite dev server, http://localhost:5173
 ```
 
-The optimized files will be in the `dist/` directory.
+No environment variables are used anywhere in this repo.
 
-### Preview Production Build
+## Scripts
 
 ```bash
-npm run preview
+pnpm dev          # vite dev server
+pnpm build        # vite build -> dist/
+pnpm preview      # preview production build
+pnpm test         # vitest (watch)
+pnpm test:run     # vitest run (single pass)
+pnpm biome:check  # lint + format check
+pnpm biome:fix    # lint + format, write
+pnpm check        # biome:check && test:run && build (full local gate)
+pnpm audit        # pnpm audit --audit-level high (alias: pnpm security)
 ```
 
-## 📁 Project Structure
+## Project structure
 
 ```
-space-tourism-website/
-├── assets/                   # Images and media files
-│   ├── crew/                # Crew member images (PNG/WebP)
-│   ├── destination/         # Destination images (PNG/WebP)
-│   ├── home/                # Home page backgrounds
-│   ├── shared/              # Shared assets (logo, icons)
-│   ├── technology/          # Technology images
-│   └── favicon-32x32.png    # Site favicon
-├── index.html               # Home page
-├── destination.html         # Destinations page with tabs
-├── destination-*.html       # Individual destination pages
-├── crew.html                # Crew page with tabs
-├── crew-*.html              # Individual crew member pages
-├── technology.html          # Technology page with tabs
-├── technology-*.html        # Individual technology pages
-├── design-system.html       # Design system showcase
-├── index.css                # Main stylesheet
-├── navigation.js            # Mobile navigation logic
-├── tabs.js                  # Tab interface functionality
-├── transitions.js           # Page transition effects
-├── utils.js                 # Utility functions (back-to-top, parallax, tooltips, progress indicator)
-├── enhancements.js          # Advanced animations (scroll reveal, counters, ripples, image effects)
-├── data.json                # Content data (destinations, crew, technology)
-├── package.json             # Project dependencies
-├── vite.config.js           # Vite configuration
-├── manifest.json            # PWA manifest
-├── robots.txt               # SEO robots file
-├── sitemap.xml              # SEO sitemap
-├── CONTRIBUTING.md          # Contribution guidelines
-├── LICENSE                  # MIT License
-└── .gitignore               # Git ignore rules
+space-travel-website/
+├── assets/                   # Images (PNG + WebP pairs), organized by section
+│   ├── crew/
+│   ├── destination/
+│   ├── home/
+│   ├── shared/
+│   └── technology/
+├── public/                   # Static files served as-is (robots.txt, sitemap.xml, textures)
+├── __tests__/                # Vitest specs
+├── index.html                # Home page
+├── destination.html          # Destinations page with tabs
+├── destination-*.html        # Individual destination pages
+├── crew.html                 # Crew page with tabs
+├── crew-*.html               # Individual crew member pages
+├── technology.html           # Technology page with tabs
+├── technology-*.html         # Individual technology pages
+├── design-system.html        # Design system showcase
+├── data.json                 # Content data (destinations, crew, technology)
+├── vite.config.js            # Vite configuration (page entry points)
+├── manifest.json             # PWA manifest
+└── sw.js                     # Service worker
 ```
 
-## 🎨 Design System
+## Design system
 
-The project includes a dedicated [design-system.html](design-system.html) page that showcases:
+`design-system.html` showcases the color palette, typography, and components. See
+`docs/superpowers/specs/2026-07-25-cinematic-redesign-design.md` for the design direction the
+current visual layer (`cinematic.css`) implements.
 
-### Color Palette
-- **Dark:** `hsl(230, 35%, 7%)` / `#0B0D17` - Primary background
-- **Light/Accent:** `hsl(231, 77%, 90%)` / `#D0D6F9` - Accent text
-- **White:** `hsl(0, 0%, 100%)` / `#FFFFFF` - Primary text
+## Accessibility
 
-### Typography
-- **Serif:** Bellefair - Headings and large text
-- **Sans Condensed:** Barlow Condensed - Navigation and labels
-- **Sans Normal:** Barlow - Body text
+WCAG-conscious: semantic HTML, ARIA labels/roles/attributes, skip-to-content link, keyboard
+navigation (Tab, Escape, Arrow keys), focus-visible states, `prefers-reduced-motion` fallbacks.
 
-### Responsive Breakpoints
-- Mobile: < 35rem (560px)
-- Tablet: 35rem - 45rem (560px - 720px)
-- Desktop: > 45rem (720px+)
-
-## 🎯 JavaScript Modules
-
-### navigation.js
-- Hamburger menu toggle for mobile
-- Click outside to close menu
-- Escape key to close menu
-- ARIA attributes for accessibility
-
-### tabs.js
-- Keyboard navigation with Arrow keys
-- ARIA-compliant tab panels
-- Synchronizes content and images
-- Supports both dot indicators and number indicators
-
-### transitions.js
-- Page transition overlays
-- Loading indicator with "Preparing for launch..." message
-- Entrance animations for main content
-- Prevents same-page reloads
-
-### utils.js
-- Back-to-top button with smooth scroll
-- Parallax effect for background elements
-- Lazy loading for images with fade-in
-- Tooltip system
-- Scroll progress indicator
-
-### enhancements.js
-- Scroll reveal animations with IntersectionObserver
-- Animated counter for statistics
-- Image hover effects (scale and translate)
-- Ripple effects on buttons
-- Enhanced progress indicator with gradient
-- Image skeleton screens
-- Staggered list animations
-- Performance monitoring (Core Web Vitals in development)
-
-## ♿ Accessibility Features
-
-- Semantic HTML5 elements
-- ARIA labels, roles, and attributes (aria-controls, aria-expanded, aria-selected)
-- Skip to content link
-- Keyboard navigation support (Tab, Escape, Arrow keys)
-- Focus visible states
-- Screen reader friendly
-- Hidden decorative elements with aria-hidden
-- Sufficient color contrast
-
-## 🌐 Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 📱 Responsive Design
-
-The website is fully responsive and optimized for:
-- Mobile devices (320px+)
-- Tablets (560px - 720px)
-- Desktops (720px+)
-
-## 🔧 Development
-
-### Data Structure
-
-Content is stored in [data.json](data.json) with the following structure:
-- **destinations**: Array of destination objects (name, images, description, distance, travel time)
-- **crew**: Array of crew member objects (name, images, role, bio)
-- **technology**: Array of technology objects (name, images, description)
-
-All images are available in both PNG and WebP formats for optimal performance.
-
-## 🎨 Credits & Attribution
+## Credits and attribution
 
 Planet textures on the interactive 3D destination globe:
 
-- **Moon, Mars** — [Solar System Scope](https://www.solarsystemscope.com/textures/), licensed CC BY 4.0.
-- **Europa** — NASA / JPL / USGS Voyager and Galileo global mosaic (public domain).
-- **Titan** — NASA / JPL / Space Science Institute Cassini map (public domain).
+- **Moon, Mars**: [Solar System Scope](https://www.solarsystemscope.com/textures/), licensed
+  CC BY 4.0.
+- **Europa**: NASA / JPL / USGS Voyager and Galileo global mosaic (public domain).
+- **Titan**: NASA / JPL / Space Science Institute Cassini map (public domain).
 
-3D rendering by [Three.js](https://threejs.org). Typefaces: Bellefair, Barlow, and Barlow Condensed via Google Fonts.
+3D rendering by [Three.js](https://threejs.org). Typefaces: Bellefair, Barlow, and Barlow
+Condensed via Google Fonts.
 
-## 🔒 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT. See [LICENSE](LICENSE).
 
-## 📚 Additional Resources
+## More
 
-- [Design System](design-system.html) - Visual style guide and component showcase
-- [Contributing Guidelines](CONTRIBUTING.md) - How to contribute to this project
-
-## 🙏 Acknowledgments
-
-- Google Fonts for Barlow and Bellefair typefaces
+- [Design system](design-system.html): visual style guide and component showcase
+- [Contributing guidelines](CONTRIBUTING.md)
