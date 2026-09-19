@@ -28,8 +28,8 @@ We welcome suggestions for new features! Please create an issue with:
 
 1. **Fork the Repository**
    ```bash
-   git clone https://github.com/yourusername/space-tourism-website.git
-   cd space-tourism-website
+   git clone https://github.com/yourusername/space-travel-website.git
+   cd space-travel-website
    ```
 
 2. **Create a Branch**
@@ -93,17 +93,17 @@ We welcome suggestions for new features! Please create an issue with:
 
 1. **Install Dependencies**
    ```bash
-   npm install
+   pnpm install
    ```
 
 2. **Run Development Server**
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 3. **Build for Production**
    ```bash
-   npm run build
+   pnpm build
    ```
 
 4. **Test Your Changes**
