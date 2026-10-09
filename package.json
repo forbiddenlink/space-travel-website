@@ -47,7 +47,8 @@
   "pnpm": {
     "overrides": {
       "nanoid": "3.3.19",
-      "undici": ">=7.28.0"
+      "undici": ">=7.28.0",
+      "source-map-js": ">=1.2.2"
     }
   }
 }
