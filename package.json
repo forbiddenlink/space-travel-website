@@ -44,7 +44,7 @@
   "dependencies": {
     "three": "^0.185.1"
   },
-  "packageManager": "pnpm@10.34.6",
+  "packageManager": "pnpm@10.34.7",
   "pnpm": {
     "overrides": {
       "nanoid": "3.3.19",
