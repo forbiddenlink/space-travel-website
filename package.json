@@ -42,7 +42,7 @@
   },
   "private": true,
   "dependencies": {
-    "three": "^0.185.1"
+    "three": "^0.186.0"
   },
   "packageManager": "pnpm@10.34.7",
   "pnpm": {
