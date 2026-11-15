@@ -62,7 +62,7 @@ describe('canonical host', () => {
 
   it('mailto links use the real contact address', () => {
     const mailtos = files.flatMap((f) =>
-      [...readFileSync(f, 'utf8').matchAll(/mailto:([^"'\s>]+)/g)].map((m) => m[1]),
+      [...readFileSync(f, 'utf8').matchAll(/mailto:([^"'\s>]+)/g)].map((m) => m[1])
     )
     expect(mailtos.length).toBeGreaterThan(0)
     for (const m of mailtos) expect(m).toBe(CONTACT_EMAIL)
