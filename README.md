@@ -1,29 +1,29 @@
 # Space Tourism Website
 
 A cinematic, portfolio-grade space tourism site: destinations, crew, and technology, built with
-vanilla HTML, CSS, and JavaScript (no UI framework) plus Vite and Three.js. Signature moments:
-a WebGL nebula hero with pointer parallax, and an interactive 3D planet you can drag to rotate
-on the destination pages, all with progressive enhancement, accessibility, and reduced-motion
-fallbacks.
+vanilla HTML, CSS, and JavaScript (no UI framework) plus Vite and Three.js. Its signature
+feature is an interactive 3D planet you can drag to rotate on the destination pages, with
+progressive enhancement, accessibility, and reduced-motion fallbacks.
 
-![Space Tourism Website](./assets/shared/logo.svg)
+Live: <https://space-travel-website-theta.vercel.app>. This is a fictional demo for a portfolio (the home page footer reads "Fictional Company • Portfolio Project"); there is no real booking or payment.
 
 ## Features
 
 - Interactive destination, crew, and technology pages, each with tab navigation
 - Draggable Three.js 3D planet on destination pages (crossfades textures per tab, falls back to
   flat PNG/WebP when reduced-motion is set or WebGL is unavailable)
-- WebGL nebula hero background with pointer parallax
+- A WebGL nebula background script (`shader-bg.js`, with a `#cosmic-bg` canvas on the home page) is in the repo, but no page currently loads the script
 - Accessible: semantic HTML, ARIA attributes, skip-to-content link, keyboard navigation
   (Tab/Escape/Arrow keys), focus-visible states
 - Scroll reveal animations, animated counters, ripple effects, image hover effects
 - SEO: meta tags, Open Graph, Twitter Cards, `robots.txt`, `sitemap.xml`
 - PWA manifest + service worker
+- Multi-step booking modal, launch countdown, FAQ and testimonials sections on the home page (`booking.js`, `countdown.js`, `faq.js`, `testimonials.js`), all demo content
 - Dedicated design system page (`design-system.html`)
 
 ## Stack
 
-- Vite 8, Vitest 4 (jsdom), Biome 2 (lint + format), Three.js 0.185
+- Vite 8, Vitest 4 (jsdom), Biome 2 (lint + format), Three.js 0.186
 - No framework, no TypeScript. Multi-page app: each page is a standalone HTML file wired
   through `vite.config.js`'s `rollupOptions.input`.
 - Node >=18. Package manager: **pnpm** (`pnpm-lock.yaml` is the lockfile; there is no
@@ -36,7 +36,7 @@ pnpm install
 pnpm dev          # vite dev server, http://localhost:5173
 ```
 
-No environment variables are used anywhere in this repo.
+No environment variables are used anywhere in this repo. The page heads include a PostHog analytics snippet with a public project key.
 
 ## Scripts
 
