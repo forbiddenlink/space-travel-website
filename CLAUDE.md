@@ -1,13 +1,13 @@
 # space-travel-website
 
 A cinematic, portfolio-grade space tourism site (destinations, crew, technology) built with
-vanilla HTML/CSS/JS (no UI framework) plus Vite and Three.js. Signature feature: a WebGL
-nebula hero with pointer parallax and a draggable interactive 3D planet on the destination
-pages, with progressive enhancement and reduced-motion fallbacks.
+vanilla HTML/CSS/JS (no UI framework) plus Vite and Three.js. Signature feature: a draggable
+interactive 3D planet on the destination pages (a WebGL nebula script, `shader-bg.js`, exists but
+no page loads it), with progressive enhancement and reduced-motion fallbacks.
 
 ## Stack
 
-- Vite 8, Vitest 4 (jsdom), Biome 2 (lint + format), Three.js 0.185
+- Vite 8, Vitest 4 (jsdom), Biome 2 (lint + format), Three.js 0.186
 - No framework, no TypeScript. Multi-page app: each page is a standalone HTML file wired
   through `vite.config.js` `rollupOptions.input` (index, destination, crew, technology,
   design-system, 404, plus per-item sub-pages like `destination-mars.html`, `crew-pilot.html`).
