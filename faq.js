@@ -70,7 +70,7 @@ class FAQAccordion {
                     <div class="faq-intro">
                         <h3 class="fs-600 ff-serif">Got Questions?</h3>
                         <p>We've compiled answers to the most common questions about space tourism. Can't find what you're looking for?</p>
-                        <a href="mailto:info@stellarvoyages.space" class="faq-contact-link">
+                        <a href="mailto:hello@elizabethannstein.com" class="faq-contact-link">
                             Contact our space travel specialists →
                         </a>
                     </div>
