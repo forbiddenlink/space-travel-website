@@ -1,5 +1,12 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
+import { SITE_URL } from './site.config.js'
+
+// Replaces %SITE_URL% in HTML so the live host is defined once in site.config.js.
+const siteUrl = () => ({
+  name: 'site-url',
+  transformIndexHtml: { order: 'pre', handler: (html) => html.replaceAll('%SITE_URL%', SITE_URL) },
+})
 
 export default defineConfig({
   build: {
@@ -26,5 +33,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [],
+  plugins: [siteUrl()],
 })
