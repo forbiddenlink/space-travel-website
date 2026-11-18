@@ -46,6 +46,11 @@
   },
   "packageManager": "pnpm@10.34.9",
   "pnpm": {
+    "auditConfig": {
+      "ignoreGhsas": [
+        "GHSA-fc5q-39xc-vjpf"
+      ]
+    },
     "overrides": {
       "nanoid": "3.3.19",
       "undici": ">=8.12.2 <9.0.0",
