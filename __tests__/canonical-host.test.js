@@ -33,7 +33,11 @@ describe('canonical host', () => {
     expect(read('public/robots.txt')).toContain(`Sitemap: ${SITE_URL}/sitemap.xml`)
     const locs = [...read('public/sitemap.xml').matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1])
     expect(locs.length).toBeGreaterThan(0)
-    for (const loc of locs) expect(loc.startsWith(SITE_URL)).toBe(true)
+    for (const loc of locs) {
+      expect(loc.startsWith(SITE_URL)).toBe(true)
+      // cleanUrls redirects *.html, so the sitemap must list the clean URLs.
+      expect(loc.endsWith('.html')).toBe(false)
+    }
   })
 
   it('does not hardcode the live origin in HTML (uses %SITE_URL%)', () => {
@@ -55,8 +59,10 @@ describe('canonical host', () => {
     'technology-capsule.html': 'technology.html',
   }
   for (const [sub, hub] of Object.entries(subToHub)) {
-    it(`${sub} canonicalizes to ${hub}`, () => {
-      expect(read(sub)).toContain(`<link rel="canonical" href="%SITE_URL%/${hub}">`)
+    // cleanUrls is on, so the .html form redirects; canonical must be the clean URL.
+    const clean = hub.replace('.html', '')
+    it(`${sub} canonicalizes to ${clean}`, () => {
+      expect(read(sub)).toContain(`<link rel="canonical" href="%SITE_URL%/${clean}">`)
     })
   }
 
